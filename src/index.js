@@ -1,5 +1,6 @@
-
+require('dotenv').config();
 const { Client } = require('discord.js');
+const keepAlive = require('./replit');
 const { registerCommands, registerEvents } = require('./utils/registry');
 const config = require('../slappey.json');
 const client = new Client();
@@ -10,6 +11,7 @@ const client = new Client();
   client.prefix = config.prefix;
   await registerCommands(client, '../commands');
   await registerEvents(client, '../events');
-  await client.login(config.token);
+  keepAlive();
+  await client.login(process.env.apikey);
 })();
 
